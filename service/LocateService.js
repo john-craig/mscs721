@@ -3,34 +3,34 @@
 
 /**
  * Calculate
- * Post text to generate concordance
+ * Post text to generate locations
  *
  * body String Text to be analyzed (optional)
- * returns concordance_result
+ * returns location_result
  **/
-exports.getConcordance = function(body) {
+exports.getLocations = function(body) {
   return new Promise(function(resolve, reject) {
     var examples = {};
     examples['application/json'] = {
   "input" : "The brown fox jumped over the brown log.",
-  "concordance" : [ {
+  "location" : [ {
     "token" : "brown",
-    "count" : 2
+    "locations" : [ 1, 6 ]
   }, {
     "token" : "fox",
-    "count" : 1
+    "locations" : [ 2 ]
   }, {
     "token" : "jumped",
-    "count" : 1
+    "locations" : [ 3 ]
   }, {
     "token" : "log",
-    "count" : 1
+    "locations" : [ 7 ]
   }, {
     "token" : "over",
-    "count" : 1
+    "locations" : [ 4 ]
   }, {
     "token" : "the",
-    "count" : 1
+    "locations" : [ 0, 5 ]
   } ]
 };
     if (Object.keys(examples).length > 0) {

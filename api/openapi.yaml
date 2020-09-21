@@ -7,7 +7,7 @@ info:
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
-  version: 1.0.0
+  version: 1.0.1
 servers:
 - url: https://virtserver.swaggerhub.com/mscs721/concordance/1.0.0
   description: SwaggerHub API Auto Mocking
@@ -15,6 +15,30 @@ tags:
 - name: analysis
   description: Operations available for text analysis
 paths:
+  /locate:
+    post:
+      tags:
+      - locate
+      summary: Calculate
+      description: Post text to generate locations
+      operationId: getLocations
+      requestBody:
+        description: Text to be analyzed
+        content:
+          text/plain:
+            schema:
+              type: string
+            example: The brown fox jumped over the brown log.
+      responses:
+        "200":
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/location_result'
+        "400":
+          description: invalid input, object invalid
+      x-swagger-router-controller: Locate
   /analyze:
     post:
       tags:
@@ -35,13 +59,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/result'
+                $ref: '#/components/schemas/concordance_result'
         "400":
           description: invalid input, object invalid
       x-swagger-router-controller: Analysis
 components:
   schemas:
-    result:
+    concordance_result:
       required:
       - concordance
       - input
@@ -63,7 +87,7 @@ components:
           - token: the
             count: 1
           items:
-            $ref: '#/components/schemas/result_concordance'
+            $ref: '#/components/schemas/concordance_result_concordance'
         input:
           type: string
           example: The brown fox jumped over the brown log.
@@ -82,10 +106,76 @@ components:
           count: 1
         - token: the
           count: 1
-    result_concordance:
+    location_result:
+      required:
+      - input
+      - location
+      type: object
+      properties:
+        location:
+          type: array
+          example:
+          - token: brown
+            locations:
+            - 1
+            - 6
+          - token: fox
+            locations:
+            - 2
+          - token: jumped
+            locations:
+            - 3
+          - token: log
+            locations:
+            - 7
+          - token: over
+            locations:
+            - 4
+          - token: the
+            locations:
+            - 0
+            - 5
+          items:
+            $ref: '#/components/schemas/location_result_location'
+        input:
+          type: string
+          example: The brown fox jumped over the brown log.
+      example:
+        input: The brown fox jumped over the brown log.
+        location:
+        - token: brown
+          locations:
+          - 1
+          - 6
+        - token: fox
+          locations:
+          - 2
+        - token: jumped
+          locations:
+          - 3
+        - token: log
+          locations:
+          - 7
+        - token: over
+          locations:
+          - 4
+        - token: the
+          locations:
+          - 0
+          - 5
+    concordance_result_concordance:
       type: object
       properties:
         token:
           type: string
         count:
           type: integer
+    location_result_location:
+      type: object
+      properties:
+        token:
+          type: string
+        locations:
+          type: array
+          items:
+            type: integer
