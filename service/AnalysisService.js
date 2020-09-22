@@ -17,8 +17,10 @@ exports.getConcordance = function(body) {
 
       resolve(error)
     } else {
-      const tokens = body.split(' ')
       var partialConcordance = {}
+      var tokens = body.split(' ')
+      tokens = standardize(tokens)
+      tokens.sort()
 
       tokens.forEach(token => {
         if(partialConcordance[token] == undefined) {
@@ -44,3 +46,15 @@ exports.getConcordance = function(body) {
   });
 }
 
+function standardize(stringArray){
+  const standardizedArray = stringArray.map(element => {
+    var standardized = element
+
+    standardized = standardized.toLowerCase()
+    standardized = standardized.replace(/[^0-9a-z]/gi, '')
+
+    return standardized
+  })
+
+  return standardizedArray
+}
