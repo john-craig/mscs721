@@ -14,5 +14,5 @@ npm start
 To submit a POST to the server once it is running, use:
 
 ```
-curl -X POST localhost:8080/mscs721-concordance/concordance/1.0.0/analyze -H "Content-Type: text/plain" -d [YOUR STRING HERE]
+curl -X POST localhost:8080/mscs721/concordance/1.0.0/analyze -H "Content-Type: text/plain" -d [YOUR STRING HERE]
 ```

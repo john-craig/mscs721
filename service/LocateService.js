@@ -10,34 +10,59 @@
  **/
 exports.getLocations = function(body) {
   return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = {
-  "input" : "The brown fox jumped over the brown log.",
-  "location" : [ {
-    "token" : "brown",
-    "locations" : [ 1, 6 ]
-  }, {
-    "token" : "fox",
-    "locations" : [ 2 ]
-  }, {
-    "token" : "jumped",
-    "locations" : [ 3 ]
-  }, {
-    "token" : "log",
-    "locations" : [ 7 ]
-  }, {
-    "token" : "over",
-    "locations" : [ 4 ]
-  }, {
-    "token" : "the",
-    "locations" : [ 0, 5 ]
-  } ]
-};
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
+    var location = []
+
+    if(typeof body !== "string"){
+      const error = {"error": "Please post a string in text/plain format"}
+
+      resolve(error)
+    } else {
+      var partialLocation = {}
+      var tokens = body.split(' ')
+      tokens = standardize(tokens)
+
+      console.log(tokens)
+
+      tokens.forEach((token, index) => {
+
+        if(partialLocation[token] == undefined) {
+          var locations = []
+          locations.push(index)
+
+          partialLocation[token] = locations
+        } else {
+          var locations = partialLocation[token]
+          locations.push(index)
+
+          partialLocation[token] = locations
+        }
+      })
+
+      location = Object.keys(partialLocation).map(key => {
+        return {
+          "token": key,
+          "locations": partialLocation[key]
+        }
+      })
+    }
+
+    if (location.length > 0) {
+      resolve(location);
     } else {
       resolve();
     }
   });
 }
 
+function standardize(stringArray){
+  const standardizedArray = stringArray.map(element => {
+    var standardized = element
+
+    standardized = standardized.toLowerCase()
+    standardized = standardized.replace(/[^0-9a-z]/gi, '')
+
+    return standardized
+  })
+
+  return standardizedArray
+}
