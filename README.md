@@ -11,8 +11,14 @@ npm start
 ```
 
 ### Submitting POST requests
-To submit a POST to the server once it is running, use:
+To submit a POST request to analyze a concordance, run the following command:
 
 ```
-curl -X POST localhost:8080/mscs721/concordance/1.0.0/analyze -H "Content-Type: text/plain" -d [YOUR STRING HERE]
+curl -X POST localhost:8080/[DIRNAME]/concordance/1.0.0/analyze -H "Content-Type: text/plain" -d [YOUR STRING HERE]
+```
+
+To submit a POST request to find locations in a string, run the following command:
+
+```
+curl -X POST localhost:8080/[DIRNAME]/concordance/1.0.0/locate -H "Content-Type: text/plain" -d [YOUR STRING HERE]
 ```
