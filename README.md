@@ -22,3 +22,5 @@ To submit a POST request to find locations in a string, run the following comman
 ```
 curl -X POST localhost:8080/[DIRNAME]/concordance/1.0.0/locate -H "Content-Type: text/plain" -d [YOUR STRING HERE]
 ```
+
+.
