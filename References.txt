@@ -1,0 +1,7 @@
+https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/creating-and-calling-service-objects.html
+
+https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/DynamoDB.html#constructor-property
+
+https://awspilot.dev/
+
+https://www.npmjs.com/package/aws-sdk   
