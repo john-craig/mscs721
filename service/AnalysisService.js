@@ -1,5 +1,6 @@
 'use strict';
 
+var database = require('../utils/database');
 
 /**
  * Calculate
@@ -17,31 +18,39 @@ exports.getConcordance = function(body) {
 
       resolve(error)
     } else {
-      var partialConcordance = {}
-      var tokens = body.split(' ')
-      tokens = standardize(tokens)
-      tokens.sort()
-
-      tokens.forEach(token => {
-        if(partialConcordance[token] == undefined) {
-          partialConcordance[token] = 1
+      database.getItem("Concordances", body, function(storedConcordance){
+        if(storedConcordance){
+          concordance = JSON.parse(storedConcordance.data);
         } else {
-          partialConcordance[token] = partialConcordance[token] + 1
+          var partialConcordance = {}
+          var tokens = body.split(' ')
+          tokens = standardize(tokens)
+          tokens.sort()
+  
+          tokens.forEach(token => {
+            if(partialConcordance[token] == undefined) {
+              partialConcordance[token] = 1
+            } else {
+              partialConcordance[token] = partialConcordance[token] + 1
+            }
+          })
+  
+          concordance = Object.keys(partialConcordance).map(key => {
+            return {
+              "token": key,
+              "count": partialConcordance[key]
+            }
+          })
+  
+          database.putItem("Concordances", body, JSON.stringify(concordance));
         }
-      })
 
-      concordance = Object.keys(partialConcordance).map(key => {
-        return {
-          "token": key,
-          "count": partialConcordance[key]
+        if (concordance.length > 0) {
+          resolve(concordance);
+        } else {
+          resolve();
         }
-      })
-    }
-
-    if (concordance.length > 0) {
-      resolve(concordance);
-    } else {
-      resolve();
+      });
     }
   });
 }
