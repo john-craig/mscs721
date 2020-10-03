@@ -2,6 +2,7 @@
 'use strict';
 
 var AWS = require('aws-sdk');
+var hash = require('object-hash');
 
 AWS.config.update({
     endpoint: "http://localhost:8001",
@@ -71,6 +72,13 @@ module.exports.setupTables = async function setupTables(){
 }
 
 module.exports.putItem = function putItem(table, input, data){
+    const input_length = (new TextEncoder().encode(input)).length;
+
+    //Hash inputs greater than a given length
+    if (input_length > 256){
+        input = hash(input);
+    }
+
     var params = {
         TableName: table,
         Item:{
@@ -88,6 +96,13 @@ module.exports.putItem = function putItem(table, input, data){
 }
 
 module.exports.getItem = function getItem(table, input, callback){
+    const input_length = (new TextEncoder().encode(input)).length;
+
+    //Hash inputs greater than a given length
+    if (input_length > 256){
+        input = hash(input);
+    }
+
     var params = {
         TableName: table,
         Key:{
