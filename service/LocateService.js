@@ -48,14 +48,20 @@ exports.getLocations = function(body) {
             }
           })
 
-          if (location.length > 0) {
-            database.putItem("Locations", body, JSON.stringify(location));
-
-            resolve(location);
-          } else {
-            resolve();
-          }
+          database.putItem("Locations", body, JSON.stringify(location));
         }
+
+        if (location.length > 0) {
+          var output = {
+            input: body,
+            locations: location
+          }
+
+          resolve(output);
+        } else {
+          resolve();
+        }
+
       });
     }
   });

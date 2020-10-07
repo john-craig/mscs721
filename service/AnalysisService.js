@@ -46,7 +46,12 @@ exports.getConcordance = function(body) {
         }
 
         if (concordance.length > 0) {
-          resolve(concordance);
+          var output = {
+            input: body,
+            concordance: concordance
+          }
+
+          resolve(output);
         } else {
           resolve();
         }
