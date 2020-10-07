@@ -1,3 +1,4 @@
+//requires
 'use strict';
 
 var path = require('path');
@@ -5,6 +6,11 @@ var http = require('http');
 
 var oas3Tools = require('oas3-tools');
 var serverPort = 8080;
+
+var database = require('./utils/database');
+
+//dynamoDB setup
+database.setupTables();
 
 // swaggerRouter configuration
 var options = {
@@ -20,4 +26,3 @@ http.createServer(app).listen(serverPort, function () {
     console.log('Your server is listening on port %d (http://localhost:%d)', serverPort, serverPort);
     console.log('Swagger-ui is available on http://localhost:%d/docs', serverPort);
 });
-

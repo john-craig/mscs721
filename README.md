@@ -22,3 +22,16 @@ To submit a POST request to find locations in a string, run the following comman
 ```
 curl -X POST localhost:8080/[DIRNAME]/concordance/1.0.0/locate -H "Content-Type: text/plain" -d [YOUR STRING HERE]
 ```
+
+### Deployment
+This server stub can be deployed to a cloud instance, first by installing GitHub, nodejs, and npm, and then running the command
+
+```
+npm start
+```
+
+Once the server stub is up, it can be POSTed to with the command:
+
+```
+curl -X POST [SERVER_IP]:8080/mscs721/concordance/1.0.0/[ENDPOINT]
+```

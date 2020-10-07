@@ -1,5 +1,6 @@
 'use strict';
 
+var database = require('../utils/database');
 
 /**
  * Calculate
@@ -17,39 +18,51 @@ exports.getLocations = function(body) {
 
       resolve(error)
     } else {
-      var partialLocation = {}
-      var tokens = body.split(' ')
-      tokens = standardize(tokens)
-
-      console.log(tokens)
-
-      tokens.forEach((token, index) => {
-
-        if(partialLocation[token] == undefined) {
-          var locations = []
-          locations.push(index)
-
-          partialLocation[token] = locations
+      database.getItem("Locations", body, function(storedLocation){
+        if(storedLocation){
+          location = JSON.parse(storedLocation.data);
         } else {
-          var locations = partialLocation[token]
-          locations.push(index)
+          var partialLocation = {}
+          var tokens = body.split(' ')
+          tokens = standardize(tokens)
 
-          partialLocation[token] = locations
+          tokens.forEach((token, index) => {
+
+            if(partialLocation[token] == undefined) {
+              var locations = []
+              locations.push(index)
+
+              partialLocation[token] = locations
+            } else {
+              var locations = partialLocation[token]
+              locations.push(index)
+
+              partialLocation[token] = locations
+            }
+          })
+
+          location = Object.keys(partialLocation).map(key => {
+            return {
+              "token": key,
+              "locations": partialLocation[key]
+            }
+          })
+
+          database.putItem("Locations", body, JSON.stringify(location));
         }
-      })
 
-      location = Object.keys(partialLocation).map(key => {
-        return {
-          "token": key,
-          "locations": partialLocation[key]
+        if (location.length > 0) {
+          var output = {
+            input: body,
+            locations: location
+          }
+
+          resolve(output);
+        } else {
+          resolve();
         }
-      })
-    }
 
-    if (location.length > 0) {
-      resolve(location);
-    } else {
-      resolve();
+      });
     }
   });
 }
