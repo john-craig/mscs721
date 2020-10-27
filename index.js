@@ -7,6 +7,12 @@ var http = require('http');
 var oas3Tools = require('oas3-tools');
 var serverPort = 8080;
 
+var child = require('child_process').spawn(
+    'java', ['-Djava.library.path=./database/DynamoDBLocal_lib', '-jar', './database/DynamoDBLocal.jar', '-sharedDb']
+);
+
+//-Djava.library.path=./database/DynamoDBLocal_lib -jar ./database/DynamoDBLocal.jar -sharedDb
+
 var database = require('./utils/database');
 
 //dynamoDB setup

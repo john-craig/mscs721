@@ -27,7 +27,7 @@ curl -X POST localhost:8080/[DIRNAME]/concordance/1.0.0/locate -H "Content-Type:
 This server stub can be deployed to a cloud instance, first by installing GitHub, nodejs, and npm, and then running the command
 
 ```
-npm start
+docker build -t jecraigjr/mscs621-concordance:1.0 .
 ```
 
 Once the server stub is up, it can be POSTed to with the command:
