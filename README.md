@@ -28,6 +28,8 @@ This server stub can be deployed to a cloud instance, first by installing GitHub
 
 ```
 docker build -t jecraigjr/mscs621-concordance:1.0 .
+
+docker run docker.io/jecraigjr/mscs621-concordance:1.0
 ```
 
 Once the server stub is up, it can be POSTed to with the command:
