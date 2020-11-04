@@ -13,12 +13,14 @@
   "license": "Unlicense",
   "private": true,
   "dependencies": {
-    "ejs": "latest",
     "aws-sdk": "^2.766.0",
     "connect": "^3.2.0",
+    "ejs": "latest",
+    "express": "^4.17.1",
     "js-yaml": "^3.3.0",
     "oas3-tools": "^2.0.2",
     "object-hash": "^2.0.3",
+    "swagger-ui": "^3.36.1",
     "uuid": "^8.3.0",
     "xmlhttprequest": "^1.8.0"
   }

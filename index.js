@@ -3,12 +3,14 @@
 
 var path = require('path');
 var http = require('http');
+var express = require('express');
 
 var oas3Tools = require('oas3-tools');
 var serverPort = 8080;
+var dbPort = '8001';
 
 var child = require('child_process').spawn(
-    'java', ['-Djava.library.path=./database/DynamoDBLocal_lib', '-jar', './database/DynamoDBLocal.jar', '-sharedDb', '-port', '8001']
+    'java', ['-Djava.library.path=./database/DynamoDBLocal_lib', '-jar', './database/DynamoDBLocal.jar', '-sharedDb', '-port', dbPort]
 );
 
 //-Djava.library.path=./database/DynamoDBLocal_lib -jar ./database/DynamoDBLocal.jar -sharedDb
@@ -26,6 +28,8 @@ var options = {
 var expressAppConfig = oas3Tools.expressAppConfig(path.join(__dirname, 'api/openapi.yaml'), options);
 expressAppConfig.addValidator();
 var app = expressAppConfig.getApp();
+
+//app.use(express.static(path.join(__dirname + "./client")));
 
 // Initialize the Swagger middleware
 http.createServer(app).listen(serverPort, function () {
