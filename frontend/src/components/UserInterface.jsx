@@ -42,7 +42,7 @@ class UserInterface extends React.Component {
         const requestOptions = {
           method: 'POST',
           headers: { 'Content-Type': 'text/plain' },
-          body: this.state["analyze-text"]
+          body: JSON.stringify(this.state["analyze-text"])
         };
         
         fetch('mscs721/concordance/1.0.0/analyze', requestOptions)
@@ -59,7 +59,7 @@ class UserInterface extends React.Component {
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'text/plain' },
-            body: this.state["location-text"]
+            body: JSON.stringify(this.state["location-text"])
         };
     
         fetch('mscs721/concordance/1.0.0/locate', requestOptions)

@@ -27,7 +27,7 @@ curl -X POST localhost:8080/[DIRNAME]/concordance/1.0.0/locate -H "Content-Type:
 To build a new Docker image of the project, run:
 
 ```
-docker build -t jecraigjr/mscs621-concordance:1.0 .
+docker build -t mscs621-frontend .
 ```
 
 
