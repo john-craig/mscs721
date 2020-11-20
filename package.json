@@ -1,0 +1,23 @@
+{
+  "name": "mscs721",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/john-craig/mscs721.git"
+  },
+  "author": "John Craig",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/john-craig/mscs721/issues"
+  },
+  "homepage": "https://github.com/john-craig/mscs721#readme",
+  "devDependencies": {
+    "eslint": "^7.13.0",
+    "eslint-plugin-react": "^7.21.5"
+  }
+}
