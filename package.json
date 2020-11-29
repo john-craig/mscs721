@@ -16,6 +16,11 @@
     "url": "https://github.com/john-craig/mscs721/issues"
   },
   "homepage": "https://github.com/john-craig/mscs721#readme",
+  "dependencies": {
+    "connect": "3.2.0",
+    "js-yaml": "3.3.0",
+    "oas3-tools": "2.0.2"
+  },
   "devDependencies": {
     "eslint": "^7.13.0",
     "eslint-plugin-react": "^7.21.5"

@@ -21,7 +21,7 @@ paths:
       - nltk
       summary: Calculate
       description: Post text to generate concordance
-      operationId: getNtlk
+      operationId: getNltk
       requestBody:
         description: Text to be analyzed
         content:

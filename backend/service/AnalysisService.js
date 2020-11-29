@@ -1,4 +1,5 @@
 "use strict";
+// eslint-disable-next-line no-undef
 const database = require("../utils/database");
 
 /**
