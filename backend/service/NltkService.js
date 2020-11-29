@@ -1,5 +1,5 @@
 "use strict";
-import database from "../utils/database";
+const database = require("../utils/database");
 
 /**
  * Calculate
