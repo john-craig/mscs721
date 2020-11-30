@@ -1,6 +1,8 @@
 "use strict";
 // eslint-disable-next-line no-undef
 const database = require("../utils/database");
+// eslint-disable-next-line no-undef
+const countWords = require('count-words');
 
 /**
  * Calculate
@@ -22,25 +24,7 @@ exports.getNltk = function (body) {
         if (storedConcordance) {
           concordance = JSON.parse(storedConcordance.data);
         } else {
-          var partialConcordance = {};
-          var tokens = body.split(" ");
-          tokens = standardize(tokens);
-          tokens.sort();
-
-          tokens.forEach((token) => {
-            if (partialConcordance[token] == undefined) {
-              partialConcordance[token] = 1;
-            } else {
-              partialConcordance[token] = partialConcordance[token] + 1;
-            }
-          });
-
-          concordance = Object.keys(partialConcordance).map((key) => {
-            return {
-              token: key,
-              count: partialConcordance[key],
-            };
-          });
+          concordance = countWords(body)
 
           database.putItem("Concordances", body, JSON.stringify(concordance));
         }

@@ -18,6 +18,7 @@
   "homepage": "https://github.com/john-craig/mscs721#readme",
   "dependencies": {
     "connect": "3.2.0",
+    "count-words": "^1.0.13",
     "js-yaml": "3.3.0",
     "oas3-tools": "2.0.2"
   },
