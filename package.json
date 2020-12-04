@@ -20,7 +20,8 @@
     "connect": "3.2.0",
     "count-words": "^1.0.13",
     "js-yaml": "3.3.0",
-    "oas3-tools": "2.0.2"
+    "oas3-tools": "2.0.2",
+    "timeit": "^0.1.1"
   },
   "devDependencies": {
     "eslint": "^7.13.0",
