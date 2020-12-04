@@ -1,24 +1,30 @@
 {
-  "name": "mscs721-concordance",
-  "version": "1.0.1",
-  "description": "A simple concordance API.",
+  "name": "mscs721",
+  "version": "1.0.0",
+  "description": "",
   "main": "index.js",
   "scripts": {
-    "prestart": "npm install",
-    "start": "node index.js"
+    "test": "test"
   },
-  "keywords": [
-    "swagger"
-  ],
-  "license": "Unlicense",
-  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/john-craig/mscs721.git"
+  },
+  "author": "John Craig",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/john-craig/mscs721/issues"
+  },
+  "homepage": "https://github.com/john-craig/mscs721#readme",
   "dependencies": {
-    "aws-sdk": "^2.766.0",
-    "connect": "^3.2.0",
-    "js-yaml": "^3.3.0",
-    "oas3-tools": "^2.0.2",
-    "object-hash": "^2.0.3",
-    "uuid": "^8.3.0",
-    "xmlhttprequest": "^1.8.0"
+    "connect": "3.2.0",
+    "count-words": "^1.0.13",
+    "js-yaml": "3.3.0",
+    "oas3-tools": "2.0.2",
+    "timeit": "^0.1.1"
+  },
+  "devDependencies": {
+    "eslint": "^7.13.0",
+    "eslint-plugin-react": "^7.21.5"
   }
 }
